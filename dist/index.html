@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newton To Do List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="/runtime.bundle.js"></script><script defer src="/index.bundle.js"></script></head>
+<body>
+  <section class="to-do-container">
+    <div class="head">
+      <h1>Newton To Do List</h1>
+      <span><i class="fa-solid fa-arrows-rotate refresh"></i></span>
+    </div>
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="Add a task">
+      <button type="submit"><i class="fa fa-plus addButton" aria-hidden="true"></i></button>
+    </form>
+    <div id="todo-list">
+      <ul class="to-do"></ul>
+    </div>
+    <div class="clear-completed">
+      <button class="clear-complete-tasks">Clear all completed</button>
+    </div>
+  </section>
+
+  <script src="./index.js" type="module"></script>
+</body>
+</html>
