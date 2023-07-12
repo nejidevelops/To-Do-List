@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,100&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -5,5 +7,56 @@
 }
 
 body {
-  background-color: bisque;
+  background-color: rgb(2, 14, 20);
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.to-do-container {
+  background-color: white;
+  width: 320px;
+  height: auto;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head h1 {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.head span {
+  cursor: pointer;
+  font-weight: 300;
+  position: relative;
+}
+
+.head span .refresh:hover {
+  animation: animate 1s ease-in alternate;
+}
+
+@keyframes animate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
 }
