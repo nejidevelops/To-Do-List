@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+ul {
+  list-style: none;
+}
+
 body {
   background-color: rgb(2, 14, 20);
   font-family: 'Poppins', sans-serif;
@@ -22,7 +26,6 @@ body {
   background-color: white;
   width: 320px;
   height: auto;
-  padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -34,6 +37,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem;
 }
 
 .head h1 {
@@ -59,4 +63,78 @@ body {
   to {
     transform: rotate(180deg);
   }
+}
+
+#task-form {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+#task-form input {
+  width: 300px;
+  padding: 0.5rem;
+  border: none;
+  font-style: italic;
+}
+
+#task-form input:focus {
+  outline: none;
+}
+
+.clear-completed button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.to-do li button {
+  background: none;
+  border: none;
+}
+
+.clear-completed button:hover {
+  color: white;
+}
+
+#task-form button {
+  border: none;
+  background: none;
+}
+
+.clear-completed {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  justify-content: center;
+  background: gray;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.to-do {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.to-do li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.to-do li span {
+  overflow: auto;
+  width: 240px;
+}
+
+hr {
+  border: 0.5px solid #ccc;
+  margin: 0 0 10px 0;
+  height: 1px;
 }
