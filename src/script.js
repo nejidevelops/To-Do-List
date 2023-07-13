@@ -69,6 +69,7 @@ function deleteTask(task) {
     tasks.splice(index, 1);
     updateTaskIndexes();
     saveTasks();
+    renderTasks();
   }
 }
 
