@@ -71,11 +71,6 @@ function deleteTask(task) {
   }
 }
 
-// function editTaskDescription(task, newDescription) {
-//   task.description = newDescription;
-//   saveTasks();
-// }
-
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
