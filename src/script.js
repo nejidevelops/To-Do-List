@@ -67,8 +67,15 @@ function deleteTask(task) {
 
   if (index > -1) {
     tasks.splice(index, 1);
+    updateTaskIndexes();
     saveTasks();
   }
+}
+
+function updateTaskIndexes() {
+  tasks.forEach((task, index) => {
+    task.index = index + 1;
+  });
 }
 
 function saveTasks() {
@@ -119,6 +126,7 @@ function removeCompletedTasks() {
 
   removeCompleted.addEventListener('click', () => {
     tasks = tasks.filter((task) => !task.completed);
+    updateTaskIndexes();
     renderTasks();
     saveTasks();
   });
