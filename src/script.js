@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-use-before-define */
+import { updateTaskStatus, clearCompletedTasks } from '../modules/taskStatus.js';
 import './style.css';
 
 let tasks = [];
@@ -11,15 +13,14 @@ function renderTasks() {
 
   todoList.innerHTML = '';
 
-  tasks.forEach((task) => {
+  tasks.forEach((task, taskIndex) => {
     const listItem = document.createElement('li');
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = task.completed;
     checkbox.addEventListener('change', () => {
-      task.completed = checkbox.checked;
-      saveTasks();
+      updateTaskStatus(tasks, taskIndex, checkbox.checked);
     });
 
     const taskDescription = document.createElement('span');
@@ -108,6 +109,9 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  removeAllTasks();
+  removeCompletedTasks();
 });
 
 function removeAllTasks() {
@@ -120,8 +124,6 @@ function removeAllTasks() {
   });
 }
 
-removeAllTasks();
-
 function removeCompletedTasks() {
   const removeCompleted = document.querySelector('.clear-complete-tasks');
 
@@ -132,8 +134,6 @@ function removeCompletedTasks() {
     saveTasks();
   });
 }
-
-removeCompletedTasks();
 
 if (localStorage.getItem('tasks')) {
   tasks = JSON.parse(localStorage.getItem('tasks'));
