@@ -84,15 +84,26 @@ window.addEventListener('DOMContentLoaded', () => {
   renderTasks();
 
   const taskInput = document.getElementById('task-input');
-  taskInput.addEventListener('keydown', (event) => {
-    if (event.keyCode === 13) {
-      addTask(taskInput.value);
+  const addButton = document.getElementById('add-button');
+
+  addButton.addEventListener('click', () => {
+    const taskDescription = taskInput.value.trim();
+
+    if (taskDescription !== '') {
+      addTask(taskDescription);
       taskInput.value = '';
     }
-  }) || taskInput.addEventListener('click', (e) => {
-    e.preventDefault();
-    addTask(taskInput.value);
-    taskInput.value = '';
+  });
+
+  taskInput.addEventListener('keydown', (event) => {
+    if (event.keyCode === 13) {
+      const taskDescription = taskInput.value.trim();
+
+      if (taskDescription !== '') {
+        addTask(taskDescription);
+        taskInput.value = '';
+      }
+    }
   });
 });
 
