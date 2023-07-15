@@ -51,7 +51,7 @@ This is a To-Do-List project.
 - **Working with webpack**
 
 ## 🚀 Live Demo <a name="live-demo"></a>
-**Live link will be dropped soon**
+(Newton's ToDo List)[https://newtonombese.github.io/To-Do-List/dist/]
 
 
 ## 💻 Getting Started <a name="getting-started"></a>
