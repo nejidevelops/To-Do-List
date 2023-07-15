@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-use-before-define */
+import { updateTaskStatus, clearCompletedTasks } from '../modules/taskStatus.js';
 import './style.css';
 
 let tasks = [];
@@ -9,15 +13,14 @@ function renderTasks() {
 
   todoList.innerHTML = '';
 
-  tasks.forEach((task) => {
+  tasks.forEach((task, taskIndex) => {
     const listItem = document.createElement('li');
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = task.completed;
     checkbox.addEventListener('change', () => {
-      task.completed = checkbox.checked;
-      renderTasks();
+      updateTaskStatus(tasks, taskIndex, checkbox.checked);
     });
 
     const taskDescription = document.createElement('span');
@@ -25,13 +28,13 @@ function renderTasks() {
     taskDescription.contentEditable = true;
     taskDescription.addEventListener('input', () => {
       task.description = taskDescription.textContent.trim();
+      saveTasks();
     });
 
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
     deleteButton.addEventListener('click', () => {
-      tasks = tasks.filter((t) => t !== task);
-      renderTasks();
+      deleteTask(task);
     });
 
     const hr = document.createElement('hr');
@@ -49,45 +52,66 @@ function renderTasks() {
   });
 }
 
-renderTasks();
+function addTask(taskDescription) {
+  const newTask = {
+    description: taskDescription,
+    completed: false,
+    index: tasks.length + 1,
+  };
 
-function addTask(event) {
-  if (event) {
-    event.preventDefault();
-  }
+  tasks.push(newTask);
+  saveTasks();
+}
 
-  const taskInput = document.getElementById('task-input');
-  const taskDescription = taskInput.value.trim();
+function deleteTask(task) {
+  const index = tasks.indexOf(task);
 
-  if (taskDescription !== '') {
-    const newTask = {
-      description: taskDescription,
-      completed: false,
-      index: tasks.length + 1,
-    };
-
-    tasks.push(newTask);
+  if (index > -1) {
+    tasks.splice(index, 1);
+    updateTaskIndexes();
+    saveTasks();
     renderTasks();
-
-    taskInput.value = '';
   }
 }
 
-addTask();
+function updateTaskIndexes() {
+  tasks.forEach((task, index) => {
+    task.index = index + 1;
+  });
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-  const taskForm = document.getElementById('task-form');
+function saveTasks() {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
-  taskForm.addEventListener('submit', addTask);
+window.addEventListener('DOMContentLoaded', () => {
+  renderTasks();
 
   const taskInput = document.getElementById('task-input');
-  taskInput.addEventListener('keydown', (event) => {
-    if (event.keyCode === 13) {
-      addTask(event);
+  const addButton = document.getElementById('add-button');
+
+  addButton.addEventListener('click', () => {
+    const taskDescription = taskInput.value.trim();
+
+    if (taskDescription !== '') {
+      addTask(taskDescription);
+      taskInput.value = '';
     }
   });
 
-  renderTasks();
+  taskInput.addEventListener('keydown', (event) => {
+    if (event.keyCode === 13) {
+      const taskDescription = taskInput.value.trim();
+
+      if (taskDescription !== '') {
+        addTask(taskDescription);
+        taskInput.value = '';
+      }
+    }
+  });
+
+  removeAllTasks();
+  removeCompletedTasks();
 });
 
 function removeAllTasks() {
@@ -96,18 +120,21 @@ function removeAllTasks() {
   deleteAll.addEventListener('click', () => {
     tasks = [];
     renderTasks();
+    saveTasks();
   });
 }
-
-removeAllTasks();
 
 function removeCompletedTasks() {
   const removeCompleted = document.querySelector('.clear-complete-tasks');
 
   removeCompleted.addEventListener('click', () => {
     tasks = tasks.filter((task) => !task.completed);
+    updateTaskIndexes();
     renderTasks();
+    saveTasks();
   });
 }
 
-removeCompletedTasks();
+if (localStorage.getItem('tasks')) {
+  tasks = JSON.parse(localStorage.getItem('tasks'));
+}
