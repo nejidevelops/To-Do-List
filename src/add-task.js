@@ -14,6 +14,6 @@ export function addTask(taskDescription, tasks) {
   };
 
   tasks.push(newTask);
-  renderTasks(tasks);
   saveTasks();
+  renderTasks(tasks);
 }
