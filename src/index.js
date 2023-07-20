@@ -2,11 +2,11 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-use-before-define */
 import { updateTaskStatus, clearCompletedTasks } from '../modules/taskStatus.js';
-import './style.css';
+//import './style.css';
 
 let tasks = [];
 
-function renderTasks() {
+export function renderTasks() {
   const todoList = document.querySelector('.to-do');
 
   tasks.sort((a, b) => a.index - b.index);
@@ -52,7 +52,7 @@ function renderTasks() {
   });
 }
 
-function addTask(taskDescription) {
+export function addTask(taskDescription) {
   const newTask = {
     description: taskDescription,
     completed: false,
@@ -60,10 +60,11 @@ function addTask(taskDescription) {
   };
 
   tasks.push(newTask);
-  saveTasks();
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  //saveTasks();
 }
 
-function deleteTask(task) {
+export function deleteTask(task) {
   const index = tasks.indexOf(task);
 
   if (index > -1) {
@@ -94,7 +95,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const taskDescription = taskInput.value.trim();
 
     if (taskDescription !== '') {
-      addTask(taskDescription);
+      addTask(taskDescription, tasks);
       taskInput.value = '';
     }
   });
