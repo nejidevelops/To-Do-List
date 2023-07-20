@@ -4,8 +4,7 @@
   "description": "<a name=\"readme-top\"></a>",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
-    "watch": "jest --watch",
+    "test": "jest --coverage --env=jsdom",
     "start": "webpack serve --open",
     "build": "webpack"
   },
