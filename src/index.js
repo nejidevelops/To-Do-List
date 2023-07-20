@@ -2,22 +2,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-use-before-define */
+/* eslint-disable import/no-cycle */
+
 import { updateTaskStatus, clearCompletedTasks } from '../modules/taskStatus.js';
 // eslint-disable-next-line import/no-cycle
+import { addTask } from './add-task.js';
 import { renderTasks } from './renderTask.js';
 
 let tasks = [];
-
-function addTask(taskDescription) {
-  const newTask = {
-    description: taskDescription,
-    completed: false,
-    index: tasks.length + 1,
-  };
-
-  tasks.push(newTask);
-  saveTasks();
-}
 
 export function updateTaskIndexes() {
   tasks.forEach((task, index) => {
@@ -43,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const taskDescription = taskInput.value.trim();
 
     if (taskDescription !== '') {
-      addTask(taskDescription);
+      addTask(taskDescription, tasks);
       taskInput.value = '';
     }
   });
