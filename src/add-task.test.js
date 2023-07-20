@@ -24,12 +24,11 @@ describe('addTask', () => {
   test('should add li element to the list in the DOM', () => {
     // Arrange
     const taskDescription = 'new task';
-    const tasks = [];
-
+    let tasks = [];
+    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     // Act
     addTask(taskDescription, tasks);
     const listItems = todoList.querySelectorAll('li');
-
     // Assert
     expect(listItems.length).toBe(tasks.length);
     expect(listItems[0].textContent).toBe(taskDescription);
