@@ -1,91 +1,32 @@
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-use-before-define */
+/* eslint-disable import/no-cycle */
+
 import { updateTaskStatus, clearCompletedTasks } from '../modules/taskStatus.js';
-import './style.css';
+// eslint-disable-next-line import/no-cycle
+import { addTask } from './add-task.js';
+import { renderTasks } from './renderTask.js';
 
 let tasks = [];
 
-function renderTasks() {
-  const todoList = document.querySelector('.to-do');
-
-  tasks.sort((a, b) => a.index - b.index);
-
-  todoList.innerHTML = '';
-
-  tasks.forEach((task, taskIndex) => {
-    const listItem = document.createElement('li');
-
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = task.completed;
-    checkbox.addEventListener('change', () => {
-      updateTaskStatus(tasks, taskIndex, checkbox.checked);
-    });
-
-    const taskDescription = document.createElement('span');
-    taskDescription.textContent = task.description;
-    taskDescription.contentEditable = true;
-    taskDescription.addEventListener('input', () => {
-      task.description = taskDescription.textContent.trim();
-      saveTasks();
-    });
-
-    const deleteButton = document.createElement('button');
-    deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
-    deleteButton.addEventListener('click', () => {
-      deleteTask(task);
-    });
-
-    const hr = document.createElement('hr');
-
-    listItem.appendChild(checkbox);
-    listItem.appendChild(taskDescription);
-    listItem.appendChild(deleteButton);
-    todoList.appendChild(hr);
-
-    if (task.completed) {
-      listItem.classList.add('completed');
-    }
-
-    todoList.appendChild(listItem);
-  });
-}
-
-function addTask(taskDescription) {
-  const newTask = {
-    description: taskDescription,
-    completed: false,
-    index: tasks.length + 1,
-  };
-
-  tasks.push(newTask);
-  saveTasks();
-}
-
-function deleteTask(task) {
-  const index = tasks.indexOf(task);
-
-  if (index > -1) {
-    tasks.splice(index, 1);
-    updateTaskIndexes();
-    saveTasks();
-    renderTasks();
-  }
-}
-
-function updateTaskIndexes() {
+export function updateTaskIndexes() {
   tasks.forEach((task, index) => {
     task.index = index + 1;
   });
 }
 
-function saveTasks() {
+export function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  renderTasks();
+  renderTasks(tasks);
+
+  updateTaskIndexes();
+
+  saveTasks();
 
   const taskInput = document.getElementById('task-input');
   const addButton = document.getElementById('add-button');
@@ -94,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const taskDescription = taskInput.value.trim();
 
     if (taskDescription !== '') {
-      addTask(taskDescription);
+      addTask(taskDescription, tasks);
       taskInput.value = '';
     }
   });
@@ -119,7 +60,7 @@ function removeAllTasks() {
 
   deleteAll.addEventListener('click', () => {
     tasks = [];
-    renderTasks();
+    renderTasks(tasks);
     saveTasks();
   });
 }
@@ -130,7 +71,7 @@ function removeCompletedTasks() {
   removeCompleted.addEventListener('click', () => {
     tasks = tasks.filter((task) => !task.completed);
     updateTaskIndexes();
-    renderTasks();
+    renderTasks(tasks);
     saveTasks();
   });
 }
