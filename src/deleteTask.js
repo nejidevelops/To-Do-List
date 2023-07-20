@@ -7,11 +7,10 @@ import { renderTasks } from './renderTask.js';
 
 export function deleteTask(task, tasks) {
   const index = tasks.indexOf(task);
-
-  if (index > -1) {
-    tasks.splice(index, 1);
-    updateTaskIndexes(tasks);
-    saveTasks(tasks);
-    renderTasks(tasks);
-  }
+  tasks.splice(index, 1);
+  tasks.forEach((task, index) => {
+    task.index = index + 1;
+  });
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  renderTasks(tasks);
 }
