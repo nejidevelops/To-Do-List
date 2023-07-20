@@ -5,7 +5,6 @@
 import { updateTaskStatus, clearCompletedTasks } from '../modules/taskStatus.js';
 // eslint-disable-next-line import/no-cycle
 import { renderTasks } from './renderTask.js';
-import './style.css';
 
 let tasks = [];
 
