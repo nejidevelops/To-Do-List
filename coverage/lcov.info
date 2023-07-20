@@ -32,11 +32,11 @@ SF:src\add-task.js
 FN:9,addTask
 FNF:1
 FNH:1
-FNDA:3,addTask
-DA:10,3
-DA:16,3
-DA:17,3
-DA:18,3
+FNDA:2,addTask
+DA:10,2
+DA:16,2
+DA:17,2
+DA:18,2
 LF:4
 LH:4
 BRF:0
