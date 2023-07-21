@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-cycle */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-undef */
@@ -5,6 +6,7 @@ import { deleteTask } from './deleteTask.js';
 import { updateTaskStatus } from './updateTaskStatus.js';
 import { updateTaskDescription } from './update-taskinput.js';
 import { saveTasks } from '../modules/taskStatus.js';
+
 export function renderTasks(tasks) {
   const todoList = document.querySelector('.to-do');
 

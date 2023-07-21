@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
@@ -13,9 +14,6 @@ import { saveTasks, clearCompletedTasks } from '../modules/taskStatus.js';
 let tasks = JSON.parse(localStorage.getItem('To-Do List')) || [];
 window.addEventListener('DOMContentLoaded', () => {
   renderTasks(tasks);
-
-  //saveTasks(tasks);
-  //localStorage.setItem('tasks', JSON.stringify(tasks));
 
   const taskInput = document.getElementById('task-input');
   const addButton = document.getElementById('add-button');

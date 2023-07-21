@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-undef */
 import { deleteTask } from '../deleteTask.js';
-import { saveTasks } from '../index.js';
+import { saveTasks } from '../../modules/taskStatus.js';
 
 export function renderTasks(tasks) {
   const todoList = document.querySelector('.to-do');

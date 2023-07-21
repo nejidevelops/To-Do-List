@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable import/no-cycle */
 /* eslint-disable import/named */
 /* eslint-disable import/prefer-default-export */
@@ -5,7 +6,6 @@
 
 import { saveTasks } from '../modules/taskStatus.js';
 import { renderTasks } from './renderTask.js';
-
 
 export function addTask(taskDescription) {
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];

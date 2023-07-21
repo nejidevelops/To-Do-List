@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-unused-vars */
 import { addTask } from './add-task.js';
 
 jest.mock('./renderTask.js');
@@ -31,7 +33,6 @@ describe('addTask', () => {
     const listItems = todoList.querySelectorAll('li');
     // Assert
     expect(ttasks.length).toBe(tasks.length);
-    //expect(listItems[0].textContent).toBe(taskDescription);
   });
 
   test('should add li element to the list in the DOM', () => {
@@ -48,6 +49,5 @@ describe('addTask', () => {
 
     // Assert
     expect(ttasks.length).toBe(tasks.length);
-    //expect(listItems[2].textContent).toBe(taskDescription);
   });
 });
