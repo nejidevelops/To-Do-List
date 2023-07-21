@@ -4,7 +4,8 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable import/no-cycle */
 
-import { updateTaskStatus, clearCompletedTasks } from '../modules/taskStatus.js';
+import { clearCompletedTasks } from '../modules/taskStatus.js';
+import { updateTaskStatus } from '../modules/updateTaskStatus.js';
 // eslint-disable-next-line import/no-cycle
 import { addTask } from './add-task.js';
 import { renderTasks } from './renderTask.js';

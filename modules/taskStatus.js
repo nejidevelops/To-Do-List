@@ -1,8 +1,5 @@
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-use-before-define */
-export function updateTaskStatus(tasks, taskIndex, completed) {
-  tasks[taskIndex].completed = completed;
-  saveTasks(tasks);
-}
 
 export function clearCompletedTasks(tasks) {
   tasks = tasks.filter((task) => !task.completed);
@@ -16,6 +13,6 @@ function updateTaskIndexes(tasks) {
   });
 }
 
-function saveTasks(tasks) {
+export function saveTasks(tasks) {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
