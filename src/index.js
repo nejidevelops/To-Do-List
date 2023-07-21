@@ -9,8 +9,9 @@ import { updateTaskStatus } from '../modules/updateTaskStatus.js';
 // eslint-disable-next-line import/no-cycle
 import { addTask } from './add-task.js';
 import { renderTasks } from './renderTask.js';
+import { removeCompletedTasks } from './clearall-checked.js';
 
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem('To-Do List')) || [];
 
 export function updateTaskIndexes() {
   tasks.forEach((task, index) => {
@@ -66,15 +67,13 @@ function removeAllTasks() {
   });
 }
 
-function removeCompletedTasks() {
-  const removeCompleted = document.querySelector('.clear-complete-tasks');
+function removeCompletedTasksfun() {
+  removeCompletedTasks(tasks);
+}
 
-  removeCompleted.addEventListener('click', () => {
-    tasks = tasks.filter((task) => !task.completed);
-    updateTaskIndexes();
-    renderTasks(tasks);
-    saveTasks();
-  });
+const removeCompleted = document.querySelector('.clear-complete-tasks');
+if (removeCompleted) {
+  removeCompleted.addEventListener('click', removeCompletedTasksfun);
 }
 
 if (localStorage.getItem('tasks')) {
