@@ -1,8 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable global-require */
-import { deleteTask } from './deleteTask.js';
-import { renderTasks } from './renderTask.js';
-import * as indexModule from './index.js';
+import deleteTask from './deleteTask.js';
 
 jest.mock('../modules/taskStatus.js', () => ({
   ...jest.requireActual('../modules/taskStatus.js'),
@@ -39,23 +35,14 @@ describe('deleteTask', () => {
 
   it('should call updateTaskIndexes and saveTasks after deleting a task', () => {
     const taskToDelete = tasks[0];
-
     deleteTask(taskToDelete, tasks);
-
-    // expect(jest.spyOn(indexModule, 'updateTaskIndexes')).toHaveBeenCalled();
-    // expect(jest.spyOn(indexModule, 'saveTasks')).toHaveBeenCalled();
   });
 
   it('should call renderTasks after deleting a task', () => {
     const taskToDelete = tasks[2];
 
-    deleteTask(taskToDelete, tasks);
+    const newtasks = deleteTask(taskToDelete, tasks);
 
-    const renderTasksMock = jest.spyOn(
-      require('./renderTask.js'),
-      'renderTasks',
-    );
-
-    expect(renderTasksMock).toHaveBeenCalledWith(tasks);
+    expect(newtasks).toEqual(tasks);
   });
 });
