@@ -6,9 +6,10 @@
 import { saveTasks } from '../modules/taskStatus.js';
 import { renderTasks } from './renderTask.js';
 
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 export function addTask(taskDescription) {
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
   const newTask = {
     description: taskDescription,
     completed: false,

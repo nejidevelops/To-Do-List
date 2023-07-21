@@ -4,7 +4,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable import/no-cycle */
 
-import { updateTaskStatus } from './updateTaskStatus.js';
 // eslint-disable-next-line import/no-cycle
 import { addTask } from './add-task.js';
 import { renderTasks } from './renderTask.js';
@@ -14,7 +13,10 @@ import { saveTasks, clearCompletedTasks } from '../modules/taskStatus.js';
 let tasks = JSON.parse(localStorage.getItem('To-Do List')) || [];
 window.addEventListener('DOMContentLoaded', () => {
   renderTasks(tasks);
+
   //saveTasks(tasks);
+  //localStorage.setItem('tasks', JSON.stringify(tasks));
+
   const taskInput = document.getElementById('task-input');
   const addButton = document.getElementById('add-button');
 

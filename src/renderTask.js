@@ -4,7 +4,7 @@
 import { deleteTask } from './deleteTask.js';
 import { updateTaskStatus } from './updateTaskStatus.js';
 import { updateTaskDescription } from './update-taskinput.js';
-
+import { saveTasks } from '../modules/taskStatus.js';
 export function renderTasks(tasks) {
   const todoList = document.querySelector('.to-do');
 
@@ -24,8 +24,6 @@ export function renderTasks(tasks) {
     taskDescription.textContent = task.description;
     taskDescription.contentEditable = true;
     taskDescription.addEventListener('input', () => {
-      //task.description = taskDescription.textContent.trim();
-      //saveTasks(tasks);
       updateTaskDescription(tasks, taskIndex, taskDescription.textContent);
     });
     task.index = taskIndex + 1;
