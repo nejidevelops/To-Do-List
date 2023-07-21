@@ -1,17 +1,20 @@
-/* eslint-disable import/named */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-use-before-define */
-/* eslint-disable import/no-cycle */
-
-// eslint-disable-next-line import/no-cycle
-import { addTask } from './add-task.js';
-import { renderTasks } from './renderTask.js';
-import { removeCompletedTasks } from './clearall-checked.js';
-import { saveTasks, clearCompletedTasks } from '../modules/taskStatus.js';
+import addTask from './add-task.js';
+import renderTasks from './renderTask.js';
+import removeCompletedTasks from './clearall-checked.js';
+import saveTasks from '../modules/taskStatus.js';
 
 let tasks = JSON.parse(localStorage.getItem('To-Do List')) || [];
+
+function removeAllTasks() {
+  const deleteAll = document.querySelector('.refresh');
+
+  deleteAll.addEventListener('click', () => {
+    tasks = [];
+    renderTasks(tasks);
+    saveTasks(tasks);
+  });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   renderTasks(tasks);
 
@@ -22,7 +25,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const taskDescription = taskInput.value.trim();
 
     if (taskDescription !== '') {
-      addTask(taskDescription, tasks);
+      tasks = addTask(taskDescription, tasks);
+      renderTasks(tasks);
+      saveTasks(tasks);
       taskInput.value = '';
     }
   });
@@ -42,18 +47,8 @@ window.addEventListener('DOMContentLoaded', () => {
   removeCompletedTasks();
 });
 
-function removeAllTasks() {
-  const deleteAll = document.querySelector('.refresh');
-
-  deleteAll.addEventListener('click', () => {
-    tasks = [];
-    renderTasks(tasks);
-    saveTasks(tasks);
-  });
-}
-
 function removeCompletedTasksfun() {
-  removeCompletedTasks(tasks);
+  tasks = removeCompletedTasks(tasks);
 }
 
 const removeCompleted = document.querySelector('.clear-complete-tasks');

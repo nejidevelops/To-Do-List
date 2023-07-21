@@ -1,20 +1,15 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-vars */
-import { addTask } from './add-task.js';
+import addTask from './add-task.js';
 
 jest.mock('./renderTask.js');
 jest.mock('./index.js');
 
 describe('addTask', () => {
-  let todoList;
-
   beforeEach(() => {
     // Set up the DOM before each test
     document.body.innerHTML = `
     <ul class="to-do">
     </ul>
     `;
-    todoList = document.querySelector('.to-do');
   });
 
   afterEach(() => {
@@ -28,9 +23,8 @@ describe('addTask', () => {
     const taskDescription = 'new task';
     let tasks = [];
     // Act
-    let ttasks = addTask(taskDescription, tasks);
+    const ttasks = addTask(taskDescription, tasks);
     tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const listItems = todoList.querySelectorAll('li');
     // Assert
     expect(ttasks.length).toBe(tasks.length);
   });
@@ -44,8 +38,7 @@ describe('addTask', () => {
     ];
 
     // Act
-    let ttasks = addTask(taskDescription, tasks);
-    const listItems = todoList.querySelectorAll('li');
+    const ttasks = addTask(taskDescription, tasks);
 
     // Assert
     expect(ttasks.length).toBe(tasks.length);

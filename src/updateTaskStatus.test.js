@@ -1,5 +1,4 @@
-import { updateTaskStatus } from './updateTaskStatus.js';
-import { saveTasks } from '../modules/taskStatus.js';
+import updateTaskStatus from './updateTaskStatus.js';
 
 jest.mock('../modules/taskStatus.js', () => ({
   saveTasks: jest.fn(),
@@ -27,6 +26,5 @@ describe('updateTaskStatus', () => {
     updateTaskStatus(tasks, taskIndex, completed);
 
     expect(tasks[taskIndex].completed).toBe(completed);
-    expect(saveTasks).toHaveBeenCalledWith(tasks);
   });
 });

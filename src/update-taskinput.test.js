@@ -1,25 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable global-require */
-
-import { updateTaskDescription } from './update-taskinput.js';
+import updateTaskDescription from './update-taskinput.js';
 
 jest.mock('./renderTask.js');
 jest.mock('./index.js');
 
 describe('update input', () => {
-  let todoList;
-  beforeEach(() => {
-    document.body.innerHTML = `
-            <ul class='to-do'>
-            </ul>
-        `;
-    todoList = document.querySelector('.to-do');
-  });
-  afterEach(() => {
-    // Clean up the DOM after each test
-    document.body.innerHTML = '';
-  });
-
   test('update the task input in local storage', () => {
     const tasks = [
       { description: 'Task 1', completed: false, index: 1 },

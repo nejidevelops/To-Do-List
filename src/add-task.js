@@ -1,14 +1,8 @@
-/* eslint-disable prefer-const */
-/* eslint-disable import/no-cycle */
-/* eslint-disable import/named */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-undef */
+import saveTasks from '../modules/taskStatus.js';
+import renderTasks from './renderTask.js';
 
-import { saveTasks } from '../modules/taskStatus.js';
-import { renderTasks } from './renderTask.js';
-
-export function addTask(taskDescription) {
-  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+export default function addTask(taskDescription) {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
   const newTask = {
     description: taskDescription,
@@ -19,5 +13,6 @@ export function addTask(taskDescription) {
   tasks.push(newTask);
   renderTasks(tasks);
   saveTasks(tasks);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
   return tasks;
 }

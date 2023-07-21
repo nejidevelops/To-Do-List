@@ -1,10 +1,10 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-undef */
-import { deleteTask } from '../deleteTask.js';
-import { saveTasks } from '../../modules/taskStatus.js';
+import deleteTask from '../deleteTask.js';
+import saveTasks from '../../modules/taskStatus.js';
 
-export function renderTasks(tasks) {
+export default function renderTasks(tasks) {
   const todoList = document.querySelector('.to-do');
 
   tasks.sort((a, b) => a.index - b.index);

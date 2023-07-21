@@ -1,19 +1,14 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable global-require */
-
-import { removeCompletedTasks } from './clearall-checked.js';
+import removeCompletedTasks from './clearall-checked.js';
 
 jest.mock('./renderTask.js');
 jest.mock('./index.js');
 
 describe('Clear all checked', () => {
-  let todoList;
   beforeEach(() => {
     document.body.innerHTML = `
         <ul class='to-do'>
         </ul>
     `;
-    todoList = document.querySelector('.to-do');
   });
 
   afterEach(() => {
