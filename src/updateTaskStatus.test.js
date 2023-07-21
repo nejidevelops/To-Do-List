@@ -2,7 +2,6 @@ import { updateTaskStatus } from './updateTaskStatus.js';
 import { saveTasks } from '../modules/taskStatus.js';
 
 jest.mock('../modules/taskStatus.js', () => ({
-  updateTaskIndexes: jest.fn(),
   saveTasks: jest.fn(),
 }));
 

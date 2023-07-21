@@ -9,17 +9,12 @@ import { updateTaskStatus } from './updateTaskStatus.js';
 import { addTask } from './add-task.js';
 import { renderTasks } from './renderTask.js';
 import { removeCompletedTasks } from './clearall-checked.js';
-import { updateTaskIndexes, saveTasks, clearCompletedTasks } from '../modules/taskStatus.js';
+import { saveTasks, clearCompletedTasks } from '../modules/taskStatus.js';
 
 let tasks = JSON.parse(localStorage.getItem('To-Do List')) || [];
-
 window.addEventListener('DOMContentLoaded', () => {
   renderTasks(tasks);
-
-  updateTaskIndexes();
-
-  saveTasks();
-
+  //saveTasks(tasks);
   const taskInput = document.getElementById('task-input');
   const addButton = document.getElementById('add-button');
 
@@ -37,7 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const taskDescription = taskInput.value.trim();
 
       if (taskDescription !== '') {
-        addTask(taskDescription);
+        addTask(taskDescription, tasks);
         taskInput.value = '';
       }
     }
@@ -53,7 +48,7 @@ function removeAllTasks() {
   deleteAll.addEventListener('click', () => {
     tasks = [];
     renderTasks(tasks);
-    saveTasks();
+    saveTasks(tasks);
   });
 }
 
@@ -65,4 +60,3 @@ const removeCompleted = document.querySelector('.clear-complete-tasks');
 if (removeCompleted) {
   removeCompleted.addEventListener('click', removeCompletedTasksfun);
 }
-

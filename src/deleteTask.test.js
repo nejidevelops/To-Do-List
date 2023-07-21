@@ -4,9 +4,8 @@ import { deleteTask } from './deleteTask.js';
 import { renderTasks } from './renderTask.js';
 import * as indexModule from './index.js';
 
-jest.mock('./index.js', () => ({
-  ...jest.requireActual('./index.js'),
-  updateTaskIndexes: jest.fn(),
+jest.mock('../modules/taskStatus.js', () => ({
+  ...jest.requireActual('../modules/taskStatus.js'),
   saveTasks: jest.fn(),
 }));
 
