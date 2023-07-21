@@ -4,24 +4,14 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable import/no-cycle */
 
-import { clearCompletedTasks } from '../modules/taskStatus.js';
-import { updateTaskStatus } from '../modules/updateTaskStatus.js';
+import { updateTaskStatus } from './updateTaskStatus.js';
 // eslint-disable-next-line import/no-cycle
 import { addTask } from './add-task.js';
 import { renderTasks } from './renderTask.js';
 import { removeCompletedTasks } from './clearall-checked.js';
+import { updateTaskIndexes, saveTasks, clearCompletedTasks } from '../modules/taskStatus.js';
 
 let tasks = JSON.parse(localStorage.getItem('To-Do List')) || [];
-
-export function updateTaskIndexes() {
-  tasks.forEach((task, index) => {
-    task.index = index + 1;
-  });
-}
-
-export function saveTasks() {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-}
 
 window.addEventListener('DOMContentLoaded', () => {
   renderTasks(tasks);

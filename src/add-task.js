@@ -3,7 +3,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-undef */
 
-import { saveTasks } from './index.js';
+import { saveTasks } from '../modules/taskStatus.js';
 import { renderTasks } from './renderTask.js';
 
 export function addTask(taskDescription, tasks) {

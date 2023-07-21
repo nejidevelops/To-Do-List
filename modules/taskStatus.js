@@ -7,7 +7,7 @@ export function clearCompletedTasks(tasks) {
   saveTasks(tasks);
 }
 
-function updateTaskIndexes(tasks) {
+export function updateTaskIndexes(tasks) {
   tasks.forEach((task, index) => {
     task.index = index + 1;
   });
