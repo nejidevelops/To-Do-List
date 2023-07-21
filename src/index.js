@@ -66,6 +66,3 @@ if (removeCompleted) {
   removeCompleted.addEventListener('click', removeCompletedTasksfun);
 }
 
-if (localStorage.getItem('tasks')) {
-  tasks = JSON.parse(localStorage.getItem('tasks'));
-}

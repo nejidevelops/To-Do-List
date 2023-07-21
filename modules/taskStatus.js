@@ -1,11 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-use-before-define */
-
-export function clearCompletedTasks(tasks) {
+/*export function clearCompletedTasks(tasks) {
   tasks = tasks.filter((task) => !task.completed);
   updateTaskIndexes(tasks);
   saveTasks(tasks);
-}
+}*/
 
 export function updateTaskIndexes(tasks) {
   tasks.forEach((task, index) => {
