@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-use-before-define */
-import { updateTaskStatus, clearCompletedTasks } from '../modules/taskStatus.js';
+import updateTaskStatus from './updateTaskStatus.js';
 import './style.css';
 
 let tasks = [];

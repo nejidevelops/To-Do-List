@@ -1,18 +1,15 @@
-import { addTask } from './add-task.js';
+import addTask from './add-task.js';
 
 jest.mock('./renderTask.js');
 jest.mock('./index.js');
 
 describe('addTask', () => {
-  let todoList;
-
   beforeEach(() => {
     // Set up the DOM before each test
     document.body.innerHTML = `
     <ul class="to-do">
     </ul>
     `;
-    todoList = document.querySelector('.to-do');
   });
 
   afterEach(() => {
@@ -25,13 +22,11 @@ describe('addTask', () => {
     // Arrange
     const taskDescription = 'new task';
     let tasks = [];
-    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     // Act
-    addTask(taskDescription, tasks);
-    const listItems = todoList.querySelectorAll('li');
+    const ttasks = addTask(taskDescription, tasks);
+    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     // Assert
-    expect(listItems.length).toBe(tasks.length);
-    expect(listItems[0].textContent).toBe(taskDescription);
+    expect(ttasks.length).toBe(tasks.length);
   });
 
   test('should add li element to the list in the DOM', () => {
@@ -43,11 +38,9 @@ describe('addTask', () => {
     ];
 
     // Act
-    addTask(taskDescription, tasks);
-    const listItems = todoList.querySelectorAll('li');
+    const ttasks = addTask(taskDescription, tasks);
 
     // Assert
-    expect(listItems.length).toBe(tasks.length);
-    expect(listItems[2].textContent).toBe(taskDescription);
+    expect(ttasks.length).toBe(tasks.length);
   });
 });

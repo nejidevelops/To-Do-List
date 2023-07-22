@@ -1,32 +1,22 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-use-before-define */
-/* eslint-disable import/no-cycle */
+import addTask from './add-task.js';
+import renderTasks from './renderTask.js';
+import removeCompletedTasks from './clearall-checked.js';
+import saveTasks from '../modules/taskStatus.js';
 
-import { updateTaskStatus, clearCompletedTasks } from '../modules/taskStatus.js';
-// eslint-disable-next-line import/no-cycle
-import { addTask } from './add-task.js';
-import { renderTasks } from './renderTask.js';
+let tasks = JSON.parse(localStorage.getItem('To-Do List')) || [];
 
-let tasks = [];
+function removeAllTasks() {
+  const deleteAll = document.querySelector('.refresh');
 
-export function updateTaskIndexes() {
-  tasks.forEach((task, index) => {
-    task.index = index + 1;
+  deleteAll.addEventListener('click', () => {
+    tasks = [];
+    renderTasks(tasks);
+    saveTasks(tasks);
   });
-}
-
-export function saveTasks() {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 window.addEventListener('DOMContentLoaded', () => {
   renderTasks(tasks);
-
-  updateTaskIndexes();
-
-  saveTasks();
 
   const taskInput = document.getElementById('task-input');
   const addButton = document.getElementById('add-button');
@@ -35,7 +25,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const taskDescription = taskInput.value.trim();
 
     if (taskDescription !== '') {
-      addTask(taskDescription, tasks);
+      tasks = addTask(taskDescription, tasks);
+      renderTasks(tasks);
+      saveTasks(tasks);
       taskInput.value = '';
     }
   });
@@ -45,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const taskDescription = taskInput.value.trim();
 
       if (taskDescription !== '') {
-        addTask(taskDescription);
+        addTask(taskDescription, tasks);
         taskInput.value = '';
       }
     }
@@ -55,27 +47,11 @@ window.addEventListener('DOMContentLoaded', () => {
   removeCompletedTasks();
 });
 
-function removeAllTasks() {
-  const deleteAll = document.querySelector('.refresh');
-
-  deleteAll.addEventListener('click', () => {
-    tasks = [];
-    renderTasks(tasks);
-    saveTasks();
-  });
+function removeCompletedTasksfun() {
+  tasks = removeCompletedTasks(tasks);
 }
 
-function removeCompletedTasks() {
-  const removeCompleted = document.querySelector('.clear-complete-tasks');
-
-  removeCompleted.addEventListener('click', () => {
-    tasks = tasks.filter((task) => !task.completed);
-    updateTaskIndexes();
-    renderTasks(tasks);
-    saveTasks();
-  });
-}
-
-if (localStorage.getItem('tasks')) {
-  tasks = JSON.parse(localStorage.getItem('tasks'));
+const removeCompleted = document.querySelector('.clear-complete-tasks');
+if (removeCompleted) {
+  removeCompleted.addEventListener('click', removeCompletedTasksfun);
 }

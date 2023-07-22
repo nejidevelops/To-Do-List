@@ -1,11 +1,8 @@
-/* eslint-disable import/no-cycle */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-undef */
-import { deleteTask } from './deleteTask.js';
-import { saveTasks } from './index.js';
-import { updateTaskStatus } from '../modules/taskStatus.js';
+import deleteTask from './deleteTask.js';
+import updateTaskStatus from './updateTaskStatus.js';
+import updateTaskDescription from './update-taskinput.js';
 
-export function renderTasks(tasks) {
+export default function renderTasks(tasks) {
   const todoList = document.querySelector('.to-do');
 
   tasks.sort((a, b) => a.index - b.index);
@@ -14,30 +11,27 @@ export function renderTasks(tasks) {
 
   tasks.forEach((task, taskIndex) => {
     const listItem = document.createElement('li');
-
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = task.completed;
     checkbox.addEventListener('change', () => {
       updateTaskStatus(tasks, taskIndex, checkbox.checked);
     });
-
     const taskDescription = document.createElement('span');
     taskDescription.textContent = task.description;
     taskDescription.contentEditable = true;
     taskDescription.addEventListener('input', () => {
-      task.description = taskDescription.textContent.trim();
-      saveTasks();
+      updateTaskDescription(tasks, taskIndex, taskDescription.textContent);
     });
+    task.index = taskIndex + 1;
 
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
     deleteButton.addEventListener('click', () => {
       deleteTask(task, tasks);
+      renderTasks(tasks);
     });
-
     const hr = document.createElement('hr');
-
     listItem.appendChild(checkbox);
     listItem.appendChild(taskDescription);
     listItem.appendChild(deleteButton);
